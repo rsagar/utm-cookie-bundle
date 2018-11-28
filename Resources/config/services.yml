@@ -1,0 +1,3 @@
+services:
+    medelse_utm_cookie.utm_cookie:
+        class: Medelse\UtmCookieBundle\UtmCookie\UtmCookie
