@@ -3,7 +3,7 @@
 namespace Medelse\UtmCookieBundle\UtmCookie;
 
 use DateTime;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use UnexpectedValueException;
 
 class UtmCookie
@@ -150,7 +150,7 @@ class UtmCookie
      * onKernelRequest called if autoInit is true
      * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
