@@ -109,9 +109,10 @@ class UtmCookie
 
         $this->initStaticValues();
         // utm from _COOKIE
+        $utmCookieName = filter_input(INPUT_COOKIE, $this->utmCookieName);
         $utmCookieFilter = filter_var(
-            json_decode(filter_input(INPUT_COOKIE, $this->utmCookieName), true),
-            FILTER_SANITIZE_STRING,
+            ($utmCookieName)? json_decode($utmCookieName, true) : null,
+            FILTER_SANITIZE_FULL_SPECIAL_CHARS,
             FILTER_REQUIRE_ARRAY
         );
         if (false === is_array($utmCookieFilter)) {
@@ -122,11 +123,11 @@ class UtmCookie
         $utmGetFilter = filter_input_array(
             INPUT_GET,
             [
-                'utm_campaign' => FILTER_SANITIZE_STRING,
-                'utm_medium' => FILTER_SANITIZE_STRING,
-                'utm_source' => FILTER_SANITIZE_STRING,
-                'utm_term' => FILTER_SANITIZE_STRING,
-                'utm_content' => FILTER_SANITIZE_STRING
+                'utm_campaign' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                'utm_medium' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                'utm_source' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                'utm_term' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                'utm_content' => FILTER_SANITIZE_FULL_SPECIAL_CHARS
             ]
         );
         if (false === is_array($utmGetFilter)) {
